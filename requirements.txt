@@ -7,7 +7,7 @@ typing
 pdfminer.six
 docx2txt
 nltk
-nltk.txt
+nltk.tree
 locationtagger
 datefinder
 datetime
