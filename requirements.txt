@@ -7,8 +7,6 @@ typing
 pdfminer.six
 docx2txt
 nltk
-nltk.tree
 locationtagger
 datefinder
 datetime
-httptools
