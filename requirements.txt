@@ -10,4 +10,3 @@ nltk
 locationtagger
 datefinder
 datetime
-nltk.download('stopwords')
