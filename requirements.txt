@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+gunicorn
+shutil
+pathlib
+tempfile
+typing
+pdfminer.high_level
+docx2txt
+nltk
+locationtagger
+datefinder
+datetime
