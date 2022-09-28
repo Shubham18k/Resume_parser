@@ -8,7 +8,7 @@ typing
 pdfminer.high_level
 docx2txt
 nltk
-tempfile
+backports.tempfile
 locationtagger
 datefinder
 datetime
