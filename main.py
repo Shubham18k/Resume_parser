@@ -9,6 +9,10 @@ from tempfile import NamedTemporaryFile
 
 app=FastAPI()
 
+@app.get('/')
+def hello():
+    return "Hello world"
+
 L=[]
 @app.post('/data')
 async def upload(file:List[UploadFile]=File(...)):
