@@ -4,7 +4,7 @@ gunicorn
 pytest-shutil
 pathlib
 typing
-pdfminer.high_level
+pdfminer.six
 docx2txt
 nltk
 locationtagger
