@@ -10,3 +10,7 @@ nltk
 locationtagger
 datefinder
 datetime
+numpy
+wordnet
+pros_cons
+reuters
