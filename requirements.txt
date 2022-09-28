@@ -3,7 +3,6 @@ uvicorn
 gunicorn
 pytest-shutil
 pathlib
-tempfile
 typing
 pdfminer.high_level
 docx2txt
