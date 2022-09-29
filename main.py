@@ -19,21 +19,25 @@ async def upload(file:List[UploadFile]=File(...)):
     for i in file:
         name,ext=i.filename.split('.')
         if ext=='pdf':
-            suffix = Path(i.filename).suffix
-            with NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
-                shutil.copyfileobj(i.file, tmp)
-            tmp_path = Path(tmp.name)
-            p=pdf.main(tmp_path)
-            L.append(p)
-            
+            try:
+                suffix = Path(i.filename).suffix
+                with NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
+                    shutil.copyfileobj(i.file, tmp)
+                tmp_path = Path(tmp.name)
+                p=pdf.main(tmp_path)
+                L.append(p)
+            except Exception as e:
+                return e
         elif ext=='docx':
-            suffix = Path(i.filename).suffix
-            with NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
-                shutil.copyfileobj(i.file, tmp)
-            tmp_path = Path(tmp.name)
-            d=document.main(tmp_path)
-            L.append(d)
-            
+            try:
+                suffix = Path(i.filename).suffix
+                with NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
+                    shutil.copyfileobj(i.file, tmp)
+                tmp_path = Path(tmp.name)
+                d=document.main(tmp_path)
+                L.append(d)
+            except Exception as e:
+                return e
         else:
             print(ext)
             print('Improper format')
