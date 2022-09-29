@@ -1,5 +1,5 @@
 fastapi
-uvicorb==0.9.0
+uvicorn
 gunicorn
 pytest-shutil
 pathlib
