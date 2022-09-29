@@ -14,7 +14,6 @@ class data:
         self.City=city
         self.Language=language
     
-def main(path):
-    txt=docx2txt.process(path)
+def main(txt):
     obj=data(search.name(txt),search.phone(txt),search.email(txt),search.skills(txt),search.college(txt),search.dob(txt),search.location(txt),search.language(txt),search.linkedin(txt))
     return obj

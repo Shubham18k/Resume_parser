@@ -14,7 +14,7 @@ class data:
         self.City=city
         self.Language=language
     
-def main(path):
-    txt=extract_text(path)
+def main(txt):
+    #txt=extract_text(path)
     obj=data(search.name(txt),search.phone(txt),search.email(txt),search.skills(txt),search.college(txt),search.dob(txt),search.location(txt),search.language(txt),search.linkedin(txt))
     return obj
