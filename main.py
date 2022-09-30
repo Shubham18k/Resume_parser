@@ -1,4 +1,5 @@
 from fastapi import FastAPI,Request,File,UploadFile
+import uvicorn
 import document
 import shutil
 from typing import List
@@ -62,3 +63,5 @@ async def upload(file:UploadFile=File(...)):
         print(e)
         return "No data inserted"
     
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
