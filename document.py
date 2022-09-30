@@ -1,4 +1,3 @@
-import docx2txt
 import search
 
 class data:
