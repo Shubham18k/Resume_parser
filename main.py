@@ -17,34 +17,48 @@ def hello(request:Request):
     return template.TemplateResponse("home.html",{"request":request})
 
 
-L=[]
-@app.post('/data/')
-async def upload(file:List[UploadFile]=File(...)):
-    for i in file:
-        name,ext=i.filename.split('.')
-        if ext=='pdf' or ext=='docx':
-            try:
-                f_dest = open(i.filename, 'wb')
-                shutil.copyfileobj(i.file,f_dest)
-                outfile_name = f"{i.filename}"
-                txt=extract_text(outfile_name)
-                p=document.main(txt)
-                L.append(p)
-            except Exception as e:
+def file_pdf(file):
+    L=[]
+    name,ext=file.filename.split('.')
+    if ext=='pdf':
+        try:
+            os.chdir(r'C:\Data')
+            f_dest = open(file.filename, 'wb')
+            shutil.copyfileobj(file.file,f_dest)
+            outfile_name = f"{file.filename}"
+            txt=extract_text(outfile_name)
+            p=document.main(txt)
+            L.append(p)
+        except Exception as e:
+            print(e)
+
+    elif ext=='docx':
+        try:
+            os.chdir(r'C:\Data')
+            f_dest=open(file.filename,'wb')
+            shutil.copyfileobj(file.file,f_dest)
+            doc_name=f'{file.filename}'
+            txt=docx2txt.process(doc_name)
+            d=document.main(txt)
+            L.append(d)
+        except Exception as e:
                 print(e)
 
-        elif ext=='docx':
-            try:
-                f_dest=open(i.filename,'wb')
-                shutil.copyfileobj(i.file,f_dest)
-                doc_name=f'{i.filename}'
-                txt=docx2txt.process(doc_name)
-                d=document.main(txt)
-                L.append(d)
-            except Exception as e:
-                print(e)
-
-        else:
-            return 'Invalid format'
+    else:
+        return 'Invalid format'
     return set(L)
+
+
+
+
+@app.post('/data/')
+async def upload(file:UploadFile=File(...)):
+    try:
+        data=file_pdf(file)
+        path=os.getcwd()
+        os.chdir(path)
+        return data
+    except Exception as e:
+        print(e)
+        return "No data inserted"
     
