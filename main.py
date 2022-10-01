@@ -48,6 +48,7 @@ def file_pdf(file):
 
     else:
         return 'Invalid format'
+    os.chdir('../')
     return set(L)
 
 
