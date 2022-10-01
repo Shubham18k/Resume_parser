@@ -21,9 +21,10 @@ def hello(request:Request):
 def file_pdf(file):
     L=[]
     name,ext=file.filename.split('.')
+    c=os.getcwd()
     if ext=='pdf':
         try:
-            os.chdir(r'C:\Data')
+            os.chdir(os.path.join(c,'Data'))
             f_dest = open(file.filename, 'wb')
             shutil.copyfileobj(file.file,f_dest)
             outfile_name = f"{file.filename}"
@@ -35,7 +36,7 @@ def file_pdf(file):
 
     elif ext=='docx':
         try:
-            os.chdir(r'C:\Data')
+            os.chdir(os.path.join(c,'Data'))
             f_dest=open(file.filename,'wb')
             shutil.copyfileobj(file.file,f_dest)
             doc_name=f'{file.filename}'
