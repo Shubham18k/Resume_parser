@@ -7,6 +7,7 @@ from nltk import sent_tokenize
 import datefinder
 import locationtagger
 from datetime import date
+import openpyxl
 
 #nltk.download('stopwords')
 #nltk.download('punkt')
@@ -53,7 +54,13 @@ def linkedin(txt):
     
 
 def skills(txt):
-    S=['Machine Learning','IOT','Data Egineer','Automation','cloud computing','python','R language','Node js','SQL','Mongodb','React Js','Angular JS','Java','Javascript','MS word','MS excel','Express Js',]
+    wb_obj=openpyxl.load_workbook("Skills.xlsx")
+    sheet_obj = wb_obj.active
+    m_row = sheet_obj.max_row
+    S=[]
+    for i in range(1, m_row + 1):
+        cell_obj = sheet_obj.cell(row = i, column = 1)
+        S.append(cell_obj.value)
     SKILLS_DB=[x.lower() for x in S]
     stop_words = set(nltk.corpus.stopwords.words('english'))
     word_tokens = nltk.tokenize.word_tokenize(txt)
@@ -68,7 +75,7 @@ def skills(txt):
         if ngram.lower() in SKILLS_DB:
             found_skills.add(ngram)
  
-    return found_skills
+    return set(found_skills)
 
 '''
 def skills(txt):

@@ -13,17 +13,17 @@ import json
 app=FastAPI()
 
 template= Jinja2Templates(directory="Pages")
-
+'''
 @app.get('/')
 def hello(request:Request):
     return template.TemplateResponse("home.html",{"request":request})
+'''
 
-
-def file_pdf(files):
+def file_pdf(files,c):
     L=[]
     for file in files:
         name,ext=file.filename.split('.')
-        c=os.getcwd()
+        #c=os.getcwd()
         if ext=='pdf':
             try:
                 os.chdir(os.path.join(c,'Data'))
@@ -58,16 +58,14 @@ def file_pdf(files):
 
 
 
-@app.post('/data/')
+@app.post('/')
 async def upload(file:List[UploadFile]=File(...)):
     try:
-        data=file_pdf(file)
-        #path=os.getcwd()
-        #os.chdir(path)
+        path=os.getcwd()
+        data=file_pdf(file,path)
+        os.chdir(path)
         return data
     except Exception as e:
         print(e)
         return "No data inserted"
     
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
